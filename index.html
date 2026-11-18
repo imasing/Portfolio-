@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#101114" />
+  <meta name="description" content="Portfolio of Tran Ly Duc — Software Engineering student with experience in enterprise application development, system analysis, and API integration." />
+  <title>Tran Ly Duc — Software Engineer Portfolio</title>
+  <style>
+    :root {
+      --bg: #101114;
+      --panel: #17191e;
+      --panel-2: #1d2027;
+      --text: #f3f4f6;
+      --muted: #a3a8b3;
+      --line: rgba(255,255,255,.11);
+      --accent: #b8f36b;
+      --accent-2: #8edc54;
+      --blue: #91b8ff;
+      --max: 1120px;
+      --radius: 20px;
+      --shadow: 0 18px 60px rgba(0,0,0,.28);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(ellipse at 80% 0%, rgba(145,184,255,.10), transparent 34rem),
+        radial-gradient(ellipse at 10% 18%, rgba(184,243,107,.08), transparent 30rem),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+    }
+    a { color: inherit; text-decoration: none; }
+    a:hover { color: var(--accent); }
+    .wrap { width: min(var(--max), calc(100% - 40px)); margin: 0 auto; }
+    .nav {
+      position: sticky; top: 0; z-index: 20;
+      backdrop-filter: blur(18px);
+      background: rgba(16,17,20,.78);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-inner {
+      min-height: 72px; display: flex; align-items: center;
+      justify-content: space-between; gap: 24px;
+    }
+    .brand { font-weight: 800; letter-spacing: -.04em; font-size: 1.08rem; }
+    .brand span { color: var(--accent); }
+    .nav-links { display: flex; gap: 24px; align-items: center; color: var(--muted); font-size: .92rem; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta, .button {
+      display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+      padding: 11px 16px; border-radius: 999px; font-weight: 700; font-size: .9rem;
+      border: 1px solid var(--line); transition: .2s ease;
+    }
+    .nav-cta, .button.primary { background: var(--accent); color: #141710; border-color: var(--accent); }
+    .nav-cta:hover, .button.primary:hover { background: #d0ff93; color: #141710; transform: translateY(-2px); }
+    .button.secondary { background: rgba(255,255,255,.035); color: var(--text); }
+    .button.secondary:hover { border-color: rgba(184,243,107,.55); transform: translateY(-2px); }
+    .hero { padding: 94px 0 76px; }
+    .hero-grid { display: grid; grid-template-columns: 1.35fr .65fr; gap: 54px; align-items: center; }
+    .eyebrow {
+      color: var(--accent); text-transform: uppercase; letter-spacing: .16em;
+      font-size: .75rem; font-weight: 800; display: flex; gap: 10px; align-items: center;
+    }
+    .eyebrow:before { content: ""; width: 28px; height: 1px; background: var(--accent); }
+    h1 {
+      font-size: clamp(3rem, 7vw, 5.6rem); line-height: .99; letter-spacing: -.075em;
+      margin: 22px 0 24px; max-width: 780px;
+    }
+    h1 em { color: var(--accent); font-style: normal; }
+    .hero-copy { max-width: 690px; color: #c2c6ce; font-size: 1.08rem; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+    .hero-aside {
+      border: 1px solid var(--line); background: linear-gradient(145deg, rgba(255,255,255,.065), rgba(255,255,255,.018));
+      border-radius: 28px; padding: 26px; box-shadow: var(--shadow); position: relative; overflow: hidden;
+    }
+    .hero-aside:after {
+      content: ""; position: absolute; width: 170px; height: 170px; border-radius: 50%;
+      background: rgba(184,243,107,.10); filter: blur(2px); right: -70px; top: -70px;
+    }
+    .initials {
+      width: 64px; height: 64px; display: grid; place-items: center; border-radius: 19px;
+      background: var(--accent); color: #141710; font-size: 1.3rem; font-weight: 900; letter-spacing: -.06em;
+      margin-bottom: 24px;
+    }
+    .aside-label { color: var(--muted); text-transform: uppercase; letter-spacing: .13em; font-size: .7rem; font-weight: 800; }
+    .aside-value { font-size: 1.1rem; font-weight: 750; margin: 4px 0 17px; }
+    .status { display: inline-flex; align-items: center; gap: 8px; color: #d9e7ca; font-size: .84rem; }
+    .status:before { content: ""; width: 8px; height: 8px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 0 5px rgba(184,243,107,.12); }
+    .quick-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-top: 52px; max-width: 650px; }
+    .stat { border-top: 1px solid var(--line); padding-top: 14px; }
+    .stat strong { display: block; font-size: 1.55rem; letter-spacing: -.05em; }
+    .stat span { color: var(--muted); font-size: .8rem; }
+    section { padding: 68px 0; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 28px; }
+    .section-kicker { color: var(--accent); font-size: .74rem; letter-spacing: .16em; text-transform: uppercase; font-weight: 800; }
+    h2 { font-size: clamp(2rem, 4vw, 3rem); line-height: 1.05; letter-spacing: -.06em; margin: 8px 0 0; }
+    .section-note { max-width: 430px; color: var(--muted); font-size: .92rem; }
+    .about-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 18px; }
+    .panel { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; }
+    .about-text { color: #c2c6ce; font-size: 1rem; margin: 0; }
+    .focus-list { display: grid; gap: 13px; }
+    .focus-item { display: flex; gap: 12px; align-items: flex-start; color: #d9dce2; }
+    .check { flex: 0 0 22px; height: 22px; display: grid; place-items: center; color: #151a10; background: var(--accent); border-radius: 7px; font-size: .78rem; font-weight: 900; margin-top: 2px; }
+    .project-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; }
+    .project-card {
+      min-height: 265px; padding: 25px; border-radius: var(--radius); border: 1px solid var(--line);
+      background: linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.018));
+      display: flex; flex-direction: column; transition: .22s ease; position: relative; overflow: hidden;
+    }
+    .project-card:hover { transform: translateY(-4px); border-color: rgba(184,243,107,.42); box-shadow: var(--shadow); }
+    .project-card.featured { background: linear-gradient(145deg, rgba(184,243,107,.10), rgba(255,255,255,.025)); }
+    .project-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 22px; }
+    .project-icon {
+      width: 44px; height: 44px; display: grid; place-items: center; border-radius: 14px;
+      background: rgba(255,255,255,.07); color: var(--accent); font-size: 1.15rem;
+    }
+    .project-type { color: var(--muted); font-size: .73rem; text-transform: uppercase; letter-spacing: .12em; font-weight: 800; }
+    .project-card h3 { font-size: 1.35rem; letter-spacing: -.04em; margin: 0 0 9px; }
+    .project-card p { color: #b7bdc7; margin: 0 0 18px; font-size: .92rem; }
+    .tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: auto; padding-top: 6px; }
+    .tag { color: #d4d8df; background: rgba(255,255,255,.055); border: 1px solid rgba(255,255,255,.07); padding: 5px 9px; border-radius: 999px; font-size: .72rem; }
+    .project-link { display: inline-flex; align-items: center; gap: 8px; color: var(--accent); font-weight: 750; font-size: .86rem; margin-top: 19px; }
+    .experience { display: grid; gap: 15px; }
+    .experience-item { display: grid; grid-template-columns: 180px 1fr; gap: 24px; padding: 25px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); }
+    .experience-date { color: var(--accent); font-size: .82rem; font-weight: 800; }
+    .experience-item h3 { margin: 0 0 4px; font-size: 1.18rem; letter-spacing: -.03em; }
+    .experience-sub { color: var(--muted); font-size: .86rem; margin-bottom: 12px; }
+    .experience-item ul { margin: 0; padding-left: 18px; color: #c0c5ce; font-size: .91rem; }
+    .experience-item li + li { margin-top: 6px; }
+    .skills-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 13px; }
+    .skill-box { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 19px; }
+    .skill-box h3 { margin: 0 0 12px; font-size: .98rem; }
+    .skill-box p { color: var(--muted); font-size: .85rem; margin: 0; }
+    .contact-box {
+      border-radius: 26px; padding: clamp(28px,5vw,52px); border: 1px solid rgba(184,243,107,.25);
+      background: linear-gradient(120deg, rgba(184,243,107,.12), rgba(145,184,255,.07));
+      display: flex; align-items: center; justify-content: space-between; gap: 30px;
+    }
+    .contact-box h2 { max-width: 600px; }
+    .contact-box p { color: #c2c6ce; margin-bottom: 0; }
+    .contact-actions { display: flex; flex-wrap: wrap; gap: 10px; flex-shrink: 0; }
+    footer { padding: 28px 0 38px; border-top: 1px solid var(--line); color: var(--muted); font-size: .82rem; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+    .muted-link { color: var(--muted); }
+    @media (max-width: 820px) {
+      .hero-grid, .about-grid { grid-template-columns: 1fr; }
+      .hero { padding-top: 70px; }
+      .hero-aside { max-width: 520px; }
+      .skills-grid { grid-template-columns: repeat(2,1fr); }
+      .contact-box { align-items: flex-start; flex-direction: column; }
+    }
+    @media (max-width: 620px) {
+      .wrap { width: min(100% - 28px, var(--max)); }
+      .nav-inner { min-height: 64px; }
+      .nav-links { display: none; }
+      .hero { padding: 58px 0 48px; }
+      .quick-stats { gap: 8px; margin-top: 36px; }
+      .stat strong { font-size: 1.25rem; }
+      section { padding: 52px 0; }
+      .section-head { align-items: flex-start; flex-direction: column; gap: 10px; }
+      .project-grid { grid-template-columns: 1fr; }
+      .experience-item { grid-template-columns: 1fr; gap: 8px; }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+      .panel, .project-card { padding: 21px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#top">DUC<span>.</span></a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+      </nav>
+      <a class="nav-cta" href="#contact">Let's talk <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap">
+        <div class="hero-grid">
+          <div>
+            <div class="eyebrow">Software Engineering · Portfolio</div>
+            <h1>Building useful<br><em>software</em> with<br>clear thinking.</h1>
+            <p class="hero-copy">
+              I'm Tran Ly Duc, a Software Engineering student with hands-on internship experience
+              in enterprise application development, legacy-system analysis, technical documentation,
+              and frontend/API integration. I enjoy understanding how systems work and turning
+              requirements into maintainable software.
+            </p>
+            <div class="hero-actions">
+              <a class="button primary" href="#projects">Explore my work <span aria-hidden="true">↓</span></a>
+              <a class="button secondary" href="https://www.canva.com/d/nYn7-fpWRxyYvat" target="_blank" rel="noopener">Software CV ↗</a>
+              <a class="button secondary" href="https://www.canva.com/d/Gu87pWB_1sl8Nv0" target="_blank" rel="noopener">BA CV ↗</a>
+            </div>
+            <div class="quick-stats">
+              <div class="stat"><strong>2</strong><span>Internship experiences</span></div>
+              <div class="stat"><strong>5+</strong><span>Academic / personal projects</span></div>
+              <div class="stat"><strong>Full-stack</strong><span>Technical interests</span></div>
+            </div>
+          </div>
+          <aside class="hero-aside">
+            <div class="initials">ĐT</div>
+            <div class="aside-label">Current focus</div>
+            <div class="aside-value">Software Engineering<br>& Technical Analysis</div>
+            <div class="aside-label">Based in</div>
+            <div class="aside-value">Hanoi, Vietnam</div>
+            <div class="status">Open to entry-level opportunities</div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="section-kicker">01 / About</div><h2>A developer who<br>looks beyond the UI.</h2></div>
+          <p class="section-note">My experience spans implementation and investigation — from tracing legacy business logic to documenting behavior and integrating APIs.</p>
+        </div>
+        <div class="about-grid">
+          <div class="panel">
+            <p class="about-text">
+              During my internship at FPT Software (FHL.JMS), I joined a Windows Forms/.NET to
+              Angular + .NET migration project. I contributed to UI/UX preparation, investigated
+              legacy behavior and database records, produced Detailed Design documentation,
+              and implemented Angular screens with API integration. I also collaborated with
+              frontend and backend developers through GitLab reviews and defect fixes.
+              <br><br>
+              I have also worked with AEM CMS customization and explored web development through
+              academic projects involving e-commerce, administration, wallet workflows, and system design.
+            </p>
+          </div>
+          <div class="panel focus-list">
+            <div class="focus-item"><span class="check">✓</span><span>Analyze application behavior, data flows, and business logic.</span></div>
+            <div class="focus-item"><span class="check">✓</span><span>Translate technical requirements into clear design documentation.</span></div>
+            <div class="focus-item"><span class="check">✓</span><span>Build frontend functionality and integrate REST APIs.</span></div>
+            <div class="focus-item"><span class="check">✓</span><span>Collaborate with developers, QA, leads, and project stakeholders.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="section-kicker">02 / Selected work</div><h2>Projects & contributions.</h2></div>
+          <p class="section-note">A selection of full-stack development, frontend contributions, system analysis, and software design work. Open each link for source code or project documentation.</p>
+        </div>
+        <div class="project-grid">
+          <article class="project-card featured">
+            <div class="project-top"><div class="project-icon">📚</div><div class="project-type">Featured · Full-stack</div></div>
+            <h3>Book Store</h3>
+            <p>Full-stack bookstore application with separate Customer and Admin experiences. Built with React, Express, MongoDB and Mongoose; includes registration/login, JWT authentication, role-based access control, protected routes, catalog and category management, cart, checkout, order history, and order-status administration. COD and prepaid options are modeled; an external payment provider is not yet integrated.</p>
+            <div class="tags"><span class="tag">React</span><span class="tag">Express</span><span class="tag">MongoDB</span><span class="tag">JWT</span><span class="tag">RBAC</span></div>
+            <a class="project-link" href="https://github.com/imasing/Book-Store/tree/develop" target="_blank" rel="noopener">View develop branch ↗</a>
+          </article>
+
+          <article class="project-card">
+            <div class="project-top"><div class="project-icon">🍜</div><div class="project-type">Academic · Analysis & frontend</div></div>
+            <h3>Food-order — Restaurant Management</h3>
+            <p>Contributed to requirements analysis and SRS, mapped the customer journey from menu selection to checkout, identified staff workflows for order and table handling, and developed ReactJS staff screens.</p>
+            <div class="tags"><span class="tag">ReactJS</span><span class="tag">SRS</span><span class="tag">Workflow</span><span class="tag">Frontend</span></div>
+            <a class="project-link" href="https://docs.google.com/document/d/11Rvq7S76-NO11uMbGLrfHp1882sM8wp5GlmmvJqwJrE/edit?usp=sharing" target="_blank" rel="noopener">View project requirements document ↗</a>
+          </article>
+
+          <article class="project-card">
+            <div class="project-top"><div class="project-icon">🎧</div><div class="project-type">Frontend contribution</div></div>
+            <h3>Music Streaming App</h3>
+            <p>Contributed to the Admin interface and player state handling, including preserving the current playback state so the user can return to the track they were listening to.</p>
+            <div class="tags"><span class="tag">Frontend</span><span class="tag">Admin UI</span><span class="tag">Playback State</span></div>
+            <a class="project-link" href="https://github.com/toikobi401/MMA301_GR2_PR02" target="_blank" rel="noopener">View source repository ↗</a>
+          </article>
+
+          <article class="project-card">
+            <div class="project-top"><div class="project-icon">🏨</div><div class="project-type">System analysis & design</div></div>
+            <h3>Hotel Management System</h3>
+            <p>Produced software design artifacts for a hotel management system, with a focus on Class Diagrams and Sequence Diagrams. The repository also contains a broader requirements and architecture specification.</p>
+            <div class="tags"><span class="tag">UML</span><span class="tag">Class Diagram</span><span class="tag">Sequence Diagram</span><span class="tag">System Design</span></div>
+            <a class="project-link" href="https://github.com/toikobi401/SWD392" target="_blank" rel="noopener">View design repository ↗</a>
+          </article>
+
+          <article class="project-card">
+            <div class="project-top"><div class="project-icon">🛒</div><div class="project-type">Web application</div></div>
+            <h3>Maniac Shopping Web</h3>
+            <p>Java Servlet and JSP shopping web application backed by SQL Server, with product and category browsing, account registration/login, cart operations, order records, and admin product management.</p>
+            <div class="tags"><span class="tag">Java Servlet</span><span class="tag">JSP</span><span class="tag">SQL Server</span></div>
+            <a class="project-link" href="https://github.com/imasing/Maniac-shoppingweb" target="_blank" rel="noopener">View source repository ↗</a>
+          </article>
+
+          <article class="project-card">
+            <div class="project-top"><div class="project-icon">♠</div><div class="project-type">Backend & mobile app</div></div>
+            <h3>Poker App — Virtual Chip Wallet</h3>
+            <p>Worked on wallet functionality for simulated in-app chips, including deposit and withdrawal flows, balance updates, and transaction history. These are play-chip transactions, not real-money payments or payOS integration.</p>
+            <div class="tags"><span class="tag">React Native</span><span class="tag">Expo</span><span class="tag">Fastify</span><span class="tag">MongoDB</span></div>
+            <a class="project-link" href="https://github.com/toikobi401/MMA301_GR2_PR01" target="_blank" rel="noopener">View source repository ↗</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="section-kicker">03 / Experience</div><h2>Where I learned<br>to ship software.</h2></div>
+          <p class="section-note">Internship experience across enterprise migration and CMS customization.</p>
+        </div>
+        <div class="experience">
+          <article class="experience-item">
+            <div class="experience-date">May 2026 — Sep 2026</div>
+            <div>
+              <h3>Software Engineer Intern · FPT Software</h3>
+              <div class="experience-sub">FHL.JMS · Enterprise logistics system migration · Angular + .NET</div>
+              <ul>
+                <li>Investigated legacy Windows Forms/.NET behavior by debugging application flows and querying the database to verify records and business logic.</li>
+                <li>Produced Detailed Design documentation for screen-level and common functionality, describing UI behavior, functions, FE/BE responsibilities, and API flows.</li>
+                <li>Implemented Angular screens, form and event logic, services, and REST API request/payload integration; investigated integration issues with backend developers.</li>
+                <li>Used Hoppscotch for API testing and GitLab merge requests for code review, feedback resolution, and merge-conflict handling.</li>
+                <li>Collaborated with Tech Leads, developers, QA, Comtor, onsite members, and client stakeholders; demonstrated a high-priority shared feature.</li>
+              </ul>
+            </div>
+          </article>
+          <article class="experience-item">
+            <div class="experience-date">Sep 2025 — Nov 2025</div>
+            <div>
+              <h3>Frontend / CMS Intern · FPT Software</h3>
+              <div class="experience-sub">SCM CXM · Adobe Experience Manager (AEM)</div>
+              <ul>
+                <li>Supported AEM CMS customization by writing scripts and HTML for custom components, and contributed to dynamic black-box checks of website pages.</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="section-kicker">04 / Technical toolkit</div><h2>Tools I work with.</h2></div>
+          <p class="section-note">Grouped by area. This list distinguishes hands-on internship experience from technologies used in coursework and self-study.</p>
+        </div>
+        <div class="skills-grid">
+          <div class="skill-box"><h3>Frontend</h3><p>Angular · TypeScript · React · HTML · CSS / SCSS</p></div>
+          <div class="skill-box"><h3>Backend & APIs</h3><p>Node.js · Express · REST API · .NET exposure</p></div>
+          <div class="skill-box"><h3>Data</h3><p>SQL · Database investigation · MongoDB</p></div>
+          <div class="skill-box"><h3>Tools & Methods</h3><p>GitLab · Hoppscotch · Detailed Design · UML</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrap">
+        <div class="contact-box">
+          <div>
+            <div class="section-kicker">05 / Contact</div>
+            <h2>Have a role or project in mind?</h2>
+            <p>I'm open to entry-level opportunities in software development and business analysis.</p>
+          </div>
+          <div class="contact-actions">
+            <a class="button primary" href="mailto:und3r7hemoon@gmail.com">Email me ↗</a>
+            <a class="button secondary" href="https://github.com/imasing" target="_blank" rel="noopener">GitHub ↗</a>
+            <a class="button secondary" href="https://www.canva.com/d/nYn7-fpWRxyYvat" target="_blank" rel="noopener">Software CV ↗</a>
+            <a class="button secondary" href="https://www.canva.com/d/Gu87pWB_1sl8Nv0" target="_blank" rel="noopener">BA CV ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <span>© <span id="year"></span> Tran Ly Duc. Built with HTML & CSS.</span>
+      <span><a class="muted-link" href="#top">Back to top ↑</a></span>
+    </div>
+  </footer>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
